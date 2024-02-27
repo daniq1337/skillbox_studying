@@ -11,11 +11,10 @@
 
 educational_grant, expenses = 10000, 12000
 
-# TODO здесь ваш код
 months = 2
 total = expenses
 while months <= 10:
-    expenses = expenses * 1.03
+    expenses *= 1.03
     total += expenses
     months += 1
 print('Студенту необходимо попросить', round(total - educational_grant * 10, 0), 'рублей.')
