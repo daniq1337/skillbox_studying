@@ -8,15 +8,17 @@
 # Формат вывода:
 #   Целочисленное деление ХХХ на YYY дает ZZZ
 
-a, b = 555, 37
-x = b
-z = 0
+a, b = 179, 37
 
-while b <= a:
-    b += x
-    z += 1
+i = b
+int_div = 0
+while i <= a:
+    i += b
+    int_div += 1
 else:
-    print(z)
+    print('Целочисленное деление', a, 'на', b, 'даёт', int_div)
+
+# done!
 
 
 
