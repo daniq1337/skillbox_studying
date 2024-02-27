@@ -20,12 +20,26 @@ paper_x, paper_y = 8, 9
 # paper_x, paper_y = 9, 11
 # (просто раскоментировать нужную строку и проверить свой код)
 
-# envelop = envelop_x * envelop_y
-# paper = paper_x * paper_y
-# if paper < envelop:
-#     print('ДА')
+# if paper_x < envelop_x:
+#     if paper_y < envelop_y:
+#         print('ДА')
+#     else:
+#         if paper_y < envelop_x:
+#             if paper_x < envelop_y:
+#                 print('ДА')
+#             else:
+#                 print('НЕТ')
+#         else:
+#             print('НЕТ')
 # else:
-#     print('НЕТ')
+#     if paper_x < envelop_y:
+#         if paper_y < envelop_x:
+#             print('ДА')
+#         else:
+#             print('НЕТ')
+#     else:
+#         print('НЕТ')
+# done!
 
 # Усложненное задание, решать по желанию.
 # Заданы размеры hole_x, hole_y прямоугольного отверстия и размеры brick_х, brick_у, brick_z кирпича (все размеры
@@ -34,7 +48,7 @@ paper_x, paper_y = 8, 9
 # Определить, пройдет ли кирпич через отверстие (грани кирпича параллельны сторонам отверстия)
 
 hole_x, hole_y = 8, 9
-#brick_x, brick_y, brick_z = 11, 10, 2
+brick_x, brick_y, brick_z = 11, 10, 2
 # brick_x, brick_y, brick_z = 11, 2, 10
 # brick_x, brick_y, brick_z = 10, 11, 2
 # brick_x, brick_y, brick_z = 10, 2, 11
@@ -55,11 +69,12 @@ hole_x, hole_y = 8, 9
 # (просто раскоментировать нужную строку и проверить свой код)
 
 
-if (brick_x < hole_x and brick_y < hole_y) or (brick_x < hole_y and brick_y < hole_x):
-    print('Кирпич пройдет нижней или верхней стороной.')
-elif (brick_x < hole_x and brick_z < hole_y) or (brick_x < hole_y and brick_z < hole_x):
-    print('Кирпич пройдет идним из торцов')
-elif (brick_z < hole_x and brick_y < hole_y) or (brick_z < hole_y and brick_y < hole_x):
-    print('Кирпич пройдет передом или задом')
+if (hole_x > brick_x < hole_y) and (hole_x > brick_y < hole_y):
+    print('ДА')
+elif (hole_x > brick_x < hole_y) and (hole_x > brick_z < hole_y):
+    print('ДА')
+elif (hole_x > brick_y < hole_y) and (hole_x > brick_z < hole_y):
+    print('ДА')
 else:
-    print('Кирпич не пройдет!')
+    print('НЕТ')
+# done!
