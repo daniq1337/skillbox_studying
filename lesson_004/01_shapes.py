@@ -78,13 +78,29 @@ def hexagon(point, angle=0, length=100):
     v6.draw()
 
 
+def square(point, angle=0, length=100):
+    v1 = sd.get_vector(start_point=point, angle=angle, length=length, width=3)
+    v1.draw()
+
+    v2 = sd.get_vector(start_point=v1.end_point, angle=angle - 90, length=length, width=3)
+    v2.draw()
+
+    v3 = sd.get_vector(start_point=v2.end_point, angle=angle - 180, length=length, width=3)
+    v3.draw()
+
+    v4 = sd.get_vector(start_point=v3.end_point, angle=angle - 270, length=length, width=3)
+    v4.draw()
+
+
 x, y = 100, 700
 point = sd.get_point(x, y)
 point_1 = sd.get_point(x, y-500)
-point_2 = sd.get_point(x+300, y)
+point_2 = sd.get_point(x+600, y)
+point_3 = sd.get_point(x+600, y-400)
 pentagon(point=point, angle=10, length=150)
 triangle(point=point_1, angle=20, length=200)
-hexagon(point=point_2, angle=0, length=200)
+hexagon(point=point_2, angle=0, length=150)
+square(point=point_3, angle=0, length=200)
 
 
 
