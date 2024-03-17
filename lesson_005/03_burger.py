@@ -13,6 +13,16 @@
 # с помощью фукций из my_burger и вывести на консоль.
 
 # Создать рецепт своего бургера, по вашему вкусу.
-# Если не хватает инградиентов - создать соответствующие функции в модуле my_burger
+# Если не хватает ингредиентов - создать соответствующие функции в модуле my_burger
 
-# TODO здесь ваш код
+from my_burger import *
+
+add_bun()
+add_cutlet()
+add_cheese()
+add_cutlet()
+add_cheese()
+add_cucumber()
+add_tomato()
+add_mayonnaise()
+add_bun()
