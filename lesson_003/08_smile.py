@@ -9,7 +9,6 @@ import simple_draw as sd
 # Параметры функции: кордината X, координата Y, цвет.
 # Вывести 10 смайликов в произвольных точках экрана.
 
-# TODO здесь ваш код
 sd.resolution = (800, 800)
 sd.background_color = sd.COLOR_WHITE
 

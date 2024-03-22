@@ -49,10 +49,10 @@ def draw_branches(point, angle, length=100):
 
 
 sd.resolution = (1200, 800)
-point = sd.get_point(500, 15)
+point = sd.get_point(800, 15)
 
 
-root_point = sd.get_point(700, 15)
+root_point = sd.get_point(1000, 15)
 draw_branches(point=root_point, angle=90, length=100)
 
 
@@ -95,7 +95,7 @@ colors = {1: sd.COLOR_RED,
           4: sd.COLOR_DARK_GREEN,
           }
 
-root_point = sd.get_point(300, 15)
+root_point = sd.get_point(500, 15)
 draw_branches(point=root_point, angle=90, length=100)
 
 # Пригодятся функции

@@ -2,91 +2,72 @@
 
 import simple_draw as sd
 
-# 1) Написать функцию draw_branches, которая должна рисовать две ветви дерева из начальной точки
-# Функция должна принимать параметры:
-# - точка начала рисования,
-# - угол рисования,
-# - длина ветвей,
-# Отклонение ветвей от угла рисования принять 30 градусов,
 
-# 2) Сделать draw_branches рекурсивной
-# - добавить проверку на длину ветвей, если длина меньше 10 - не рисовать
-# - вызывать саму себя 2 раза из точек-концов нарисованных ветвей,
-#   с углом рисования равным углу ветви,
-#   длиной ветви меньшей чем длина ветви с коэффициентом 0.75
+wall_size = (400, 400)
+# sd.resolution = wall_size
+# sd.background_color = sd.COLOR_DARK_ORANGE
 
-# 3) первоначальный вызов:
-# root_point = get_point(300, 30)
-# draw_bunches(start_point=root_point, angle=90, length=100)
+# размер кирпича
+brick_sizer_x = 40
+brick_sizer_y = 20
 
-# Пригодятся функции
-# sd.get_point()
-# sd.get_vector()
-# Возможный результат решения см lesson_004/results/exercise_04_fractal_01.jpg
-
-# можно поиграть -шрифтами- цветами и углами отклонения
-
-sd.resolution = (1200, 800)
+half_brick = brick_sizer_x // 2
 
 
-def draw_branches(point, angle, length=100):
-    if length < 10:
-        return
+def draw_wall(pos_x=0, pos_y=0):
 
-    vector = sd.get_vector(start_point=point, angle=angle, length=length, width=2)
-    vector.draw()
+    brick_x_count = wall_size[0] // brick_sizer_x  # sd.resolution[0] // x
+    brick_y_count = wall_size[1] // brick_sizer_y  # sd.resolution[1] // y
+    x_count = brick_x_count
+    start_x = pos_x
+    start_y = pos_y
 
-    next_point = vector.end_point
-    delta = 30
-    length *= 0.75
+    for brick_y in range(brick_y_count):
 
-    next_angle = angle - delta
-    draw_branches(next_point, next_angle, length)
+        end_x = start_x + brick_sizer_x
+        end_y = start_y + brick_sizer_y
 
-    next_angle = angle + delta
-    draw_branches(next_point, next_angle, length)
+        # определяем кол-во кирпичей в ряду
+        if brick_y % 2 == 1:
+            x_count += 1
+        else:
+            x_count = brick_x_count
 
+        for brick_x in range(x_count):
 
-root_point = sd.get_point(1000, 30)
-draw_branches(point=root_point, angle=90, length=100)
+            if brick_y % 2 == 1:
+                if brick_x == 0:
+                    start_position = sd.get_point(start_x, start_y)
+                    end_position = sd.get_point(end_x-half_brick, end_y)
+                elif brick_x == x_count-1:
+                    start_position = sd.get_point(start_x-half_brick, start_y)
+                    end_position = sd.get_point(end_x - brick_sizer_x, end_y)
+                else:
+                    start_position = sd.get_point(start_x-half_brick, start_y)
+                    end_position = sd.get_point(end_x-half_brick, end_y)
+            else:
+                start_position = sd.get_point(start_x, start_y)
+                end_position = sd.get_point(end_x, end_y)
 
-# 4) Усложненное задание (делать по желанию)
-# - сделать рандомное отклонение угла ветвей в пределах 40% от 30-ти градусов
-# - сделать рандомное отклонение длины ветвей в пределах 20% от коэффициента 0.75
-# Возможный результат решения см lesson_004/results/exercise_04_fractal_02.jpg
+            sd.rectangle(left_bottom=start_position, right_top=end_position, color=sd.COLOR_DARK_ORANGE, width=0)
+            sd.rectangle(left_bottom=start_position, right_top=end_position, color=sd.COLOR_BLACK, width=1)
 
-# Пригодятся функции
-# sd.random_number()
+            # двигаем кирпич по x
+            start_x += brick_sizer_x
+            end_x += brick_sizer_x
 
+            # sd.sleep(0.03)
 
-def draw_branches(point, angle, length=100):
-    if length < 10:
-        return
+        # возвращаем по х в исходное положение
+        start_x = pos_x
 
-    vector = sd.get_vector(start_point=point, angle=angle, length=length, width=2)
-    vector.draw()
-
-    next_point = vector.end_point
-
-    delta = 30
-    delta_deviation = delta * 0.4
-    delta += sd.random_number(round(-delta_deviation), round(delta_deviation))
-
-    length = length * 0.75
-    length_deviation = round(length * 0.2)
-    length += sd.random_number(0, length_deviation)
-
-    next_angle = round(angle + delta)
-    draw_branches(next_point, round(next_angle), round(length))
-
-    next_angle = round(angle - delta)
-    draw_branches(next_point, round(next_angle), round(length))
+        # двигаем кирпич по y
+        start_y = end_y
+        end_y += brick_sizer_y
 
 
-root_point = sd.get_point(500, 30)
-draw_branches(point=root_point, angle=90, length=100)
+if __name__ == '__main__':
 
-sd.pause()
+    draw_wall(100, 100)
 
-
-# Зачет!
+    sd.pause()

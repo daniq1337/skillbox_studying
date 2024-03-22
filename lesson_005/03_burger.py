@@ -17,6 +17,8 @@
 
 from my_burger import *
 
+print('\nРецепт двойного чизбургера: \n')
+
 add_bun()
 add_cutlet()
 add_cheese()
