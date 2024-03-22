@@ -1,16 +1,13 @@
 # -*- coding: utf-8 -*-
 
-# (цикл for)
 import simple_draw as sd
 
 sd.resolution = (800, 800)
 
 
-def draw_wall():
+def draw_wall(house_x=500, house_y=500, x_for_each_row=100, start_y=100):
 
-    # размер стены
-    wall_size_x = 500
-    wall_size_y = 500
+    """ Функция рисования кирпичной стены размером wall_size_x и wall_size_y из точки x_for_each_row и start_y """
 
     # размер кирпича
     x = 50
@@ -20,21 +17,19 @@ def draw_wall():
     half_brick = x // 2
 
     # количество кирпичей в ряду
-    brick_x_count = wall_size_x // x
+    brick_x_count = house_x // x
 
     # количество рядов всего
-    brick_y_count = wall_size_y // y
+    brick_y_count = house_y // y
 
     # начальная точка по иксу
-    x_for_each_row = 100
 
     start_x = x_for_each_row
-    start_y = 100
 
     x_count = 0
 
     wall_left_bottom = sd.get_point(start_x, start_y)
-    wall_right_top = sd.get_point(start_x + wall_size_x, start_y + wall_size_y )
+    wall_right_top = sd.get_point(start_x + house_x, start_y + house_y)
     sd.rectangle(wall_left_bottom, wall_right_top, color=sd.COLOR_DARK_RED)
 
     for brick_y in range(brick_y_count):

@@ -18,7 +18,7 @@ def draw_tree(point=sd.get_point(100, 100), angle=90, length=100):
               4: sd.COLOR_DARK_GREEN,
               }
 
-    if length < 10:
+    if length < 20:
         return
 
     vector = sd.get_vector(start_point=point, angle=angle, length=length)
