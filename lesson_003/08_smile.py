@@ -1,54 +1,59 @@
 # -*- coding: utf-8 -*-
 import random
-
-# (определение функций)
 import simple_draw as sd
 
-# Написать функцию отрисовки смайлика в произвольной точке экрана
-# Форма рожицы-смайлика на ваше усмотрение
-# Параметры функции: кордината X, координата Y, цвет.
-# Вывести 10 смайликов в произвольных точках экрана.
 
-sd.resolution = (800, 800)
-sd.background_color = sd.COLOR_WHITE
+def draw_smile():
 
-SMILE_SIZE = 50
-SMILE_COLOR = sd.COLOR_YELLOW
+    # размер смайла
+    smile_size_x = 300
+    smile_size_y = smile_size_x // 2
 
-def draw_smile(x, y, color):
+    # позиция смайла на экране
+    smile_x = 100
+    smile_y = 300
+
+    # рисуем уши
+    smile_left_ear = sd.get_point(smile_x, smile_y + smile_size_y // 2)
+    smile_right_ear = sd.get_point(smile_x + smile_size_x, smile_y + smile_size_y // 2)
+    sd.circle(smile_left_ear, radius=smile_size_x//25, width=0, color=sd.COLOR_YELLOW)
+    sd.circle(smile_right_ear, radius=smile_size_x//25, width=0, color=sd.COLOR_YELLOW)
 
     # рисуем лицо
-    face_point = sd.get_point(x=x, y=y)
-    sd.circle(center_position=face_point, radius=SMILE_SIZE, color=color, width=0)
+    smile_left_bottom = sd.get_point(smile_x, smile_y)
+    smile_right_top = sd.get_point(smile_x + smile_size_x, smile_y + smile_size_y)
+    sd.ellipse(smile_left_bottom, smile_right_top, color=sd.COLOR_YELLOW)
+
+    # рисуем рот
+    smile_mouth_start = sd.get_point(smile_x+smile_size_x//3, smile_y+smile_size_y//3)
+    mouth = sd.get_vector(smile_mouth_start, angle=-10, length=smile_size_x//10)
+    mouth.draw(color=sd.COLOR_RED, width=2)
+    smile_mouth_end = mouth.end_point
+
+    mouth = sd.get_vector(smile_mouth_end, angle=0, length=smile_size_x//10)
+    mouth.draw(color=sd.COLOR_RED, width=2)
+    smile_mouth_end = mouth.end_point
+
+    mouth = sd.get_vector(smile_mouth_end, angle=10, length=smile_size_x//10)
+    mouth.draw(color=sd.COLOR_RED, width=2)
 
     # рисуем глаза
-    eye_radius = round(SMILE_SIZE * 0.1)
-    right_eye_point = sd.get_point(x=x+SMILE_SIZE*0.3, y=y+SMILE_SIZE*0.25)
-    left_eye_point = sd.get_point(x=x-SMILE_SIZE*0.3, y=y+SMILE_SIZE*0.25)
+    smile_left_eye = sd.get_point(smile_x+smile_size_x//3, smile_y+2*smile_size_y//3)
+    smile_right_eye = sd.get_point(smile_x + smile_size_x - smile_size_x // 3, smile_y + 2 * smile_size_y // 3)
+    sd.circle(smile_left_eye, radius=smile_size_x//20, color=sd.COLOR_WHITE, width=0)
+    sd.circle(smile_right_eye, radius=smile_size_x//20, color=sd.COLOR_WHITE, width=0)
 
-    sd.circle(center_position=right_eye_point, radius=eye_radius, color=sd.COLOR_BLACK, width=0)
-    sd.circle(center_position=left_eye_point, radius=eye_radius, color=sd.COLOR_BLACK, width=0)
+    sd.circle(smile_left_eye, radius=smile_size_x//50, color=sd.COLOR_BLACK, width=0)
+    sd.circle(smile_right_eye, radius=smile_size_x//50, color=sd.COLOR_BLACK, width=0)
 
-    # рисуем улыбку
-    step = SMILE_SIZE // 50
-    smile_step = SMILE_SIZE // 10
-    smile_y_pos = y
-    smile_length = SMILE_SIZE - round(SMILE_SIZE * (5 / 7))
-
-    for i in range(x-smile_length, x+smile_length+1, step):
-
-        if i <= x:
-            smile_step += step
-        else:
-            smile_step -= step
-
-        start_point = sd.get_point(i, smile_y_pos-smile_length)
-        end_point = sd.get_point(i, smile_y_pos-smile_length-smile_step)
-        sd.line(start_point, end_point, sd.COLOR_RED, width=step)
+    # рисуем нос
+    smile_nose = sd.get_point(smile_x+smile_size_x//2, smile_y+smile_size_y//2)
+    sd.circle(smile_nose, color=sd.COLOR_ORANGE, radius=smile_size_x//30, width=0)
 
 
-for _ in range(10):
-    rnd_point = sd.random_point()
-    draw_smile(rnd_point.x, rnd_point.y, SMILE_COLOR)
+if __name__ == '__main__':
+    draw_smile()
+    sd.pause()
 
-sd.pause()
+
+
