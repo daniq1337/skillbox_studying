@@ -44,3 +44,21 @@
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
 # TODO здесь ваш код...
+
+from mastermind_engine import generate_number, check_number, is_gameover
+
+user_number = 0
+generated_number = int(''.join(map(str, generate_number())))
+print(generated_number)
+
+while int(user_number) != generated_number:
+    user_number = input('Введите ваше число: ')
+
+    if len(user_number) != 4:
+        print('Ошибка! Введите четырёхзначное число.')
+    elif int(user_number[0]) == 0:
+        print('Ошибка! Первая цифра не должна быть нулём.')
+    elif int(user_number) != generated_number:
+        print('Попробуйте еще раз')
+
+print('Вы угадали!')
