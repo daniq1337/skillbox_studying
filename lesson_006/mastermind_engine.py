@@ -30,6 +30,3 @@ def check_number():
 
 def is_gameover():
     pass
-
-
-generate_number()
