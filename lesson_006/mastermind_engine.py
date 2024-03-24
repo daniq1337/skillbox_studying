@@ -45,7 +45,7 @@ def check_number(user_number, generated_number):
         if new_user_number[index] in new_generated_number:
             bulls_and_cows['cows'] += 1
 
-    print(bulls_and_cows)
+    print('быки -', bulls_and_cows['bulls'], 'коровы -', bulls_and_cows['cows'])
 
 
 def is_gameover(user_number):

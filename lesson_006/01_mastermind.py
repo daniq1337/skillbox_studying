@@ -53,9 +53,6 @@ user_answer = 0
 while True:
     user_number = input('Введите ваше число: ')
 
-    # print(user_number)
-    print(generated_number)
-
     # проверяем введённое число
     if not user_number.isnumeric():
         print('Ошибка! Введите число.')
