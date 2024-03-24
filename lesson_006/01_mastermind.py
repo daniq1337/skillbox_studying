@@ -43,22 +43,37 @@
 # Это пример применения SOLID принципа (см https://goo.gl/GFMoaI) в архитектуре программ.
 # Точнее, в этом случае важен принцип единственной ответственности - https://goo.gl/rYb3hT
 
-# TODO здесь ваш код...
 
 from mastermind_engine import generate_number, check_number, is_gameover
 
-user_number = 0
-generated_number = int(''.join(map(str, generate_number())))
-print(generated_number)
+generated_number = generate_number()
+step = 0
+user_answer = 0
 
-while int(user_number) != generated_number:
+while True:
     user_number = input('Введите ваше число: ')
 
-    if len(user_number) != 4:
+    # print(user_number)
+    print(generated_number)
+
+    # проверяем введённое число
+    if not user_number.isnumeric():
+        print('Ошибка! Введите число.')
+    elif len(user_number) != 4:
         print('Ошибка! Введите четырёхзначное число.')
     elif int(user_number[0]) == 0:
         print('Ошибка! Первая цифра не должна быть нулём.')
-    elif int(user_number) != generated_number:
-        print('Попробуйте еще раз')
-
-print('Вы угадали!')
+    elif not len(str(user_number)) == len(set(str(user_number))):
+        print('Ошибка! Все цифры должны быть разные.')
+    else:
+        check_number(user_number, generated_number)
+        step += 1
+        if is_gameover(user_number):
+            print('Вы угадали за ', step, 'ходов.')
+            print('Хотите еще? 1 - да, 2 - нет.')
+            user_answer = input()
+            if user_answer == '2':
+                break
+            else:
+                generated_number = generate_number()
+                step = 0
