@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from random import randint
+from pprint import pprint
 
 import simple_draw as sd
 
@@ -22,6 +22,7 @@ class Snowflake:
         self.factor_a = sd.random_number(1, 10) / 10
         self.factor_b = sd.random_number(1, 10) / 10
         self.factor_c = sd.random_number(30, 60)
+        self.color = sd.COLOR_WHITE
 
     def draw(self, color=sd.COLOR_WHITE):
         self.start_point = sd.get_point(x=self.x, y=self.y)
@@ -43,20 +44,36 @@ class Snowflake:
         return self.y > 0
 
 
-flake = Snowflake()
+# flake = Snowflake()
+#
+# while True:
+#     flake.clear_previous_picture()
+#     flake.move()
+#     flake.draw()
+#     if not flake.can_fall():
+#         break
+#     sd.sleep(0.1)
+#     if sd.user_want_exit():
+#         break
 
-while True:
-    flake.clear_previous_picture()
-    flake.move()
-    flake.draw()
-    if not flake.can_fall():
-        break
-    sd.sleep(0.1)
-    if sd.user_want_exit():
-        break
 
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
-# flakes = get_flakes(count=N)  # создать список снежинок
+
+def get_flakes(count=1):
+    """ Функция создания count разнообразных снежинок. По умолчанию 1 снежинка."""
+    flakes = {}
+    for i in range(count):
+        flake = Snowflake()
+        start_point = sd.get_point(x=flake.x, y=flake.y)
+        flakes[i] = {'center': start_point,
+                     'length': flake.length,
+                     'color': flake.color,
+                     'factor_a': flake.factor_a,
+                     'factor_b': flake.factor_b,
+                     'factor_c': flake.factor_c}
+
+
+# flakes = get_flakes(count=20)  # создать список снежинок
 # while True:
 #     for flake in flakes:
 #         flake.clear_previous_picture()
@@ -69,4 +86,4 @@ while True:
 #     if sd.user_want_exit():
 #         break
 
-sd.pause()
+# sd.pause()
