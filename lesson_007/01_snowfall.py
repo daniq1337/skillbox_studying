@@ -45,7 +45,6 @@ class Snowflake:
 
 
 # flake = Snowflake()
-#
 # while True:
 #     flake.clear_previous_picture()
 #     flake.move()
@@ -59,19 +58,23 @@ class Snowflake:
 
 # шаг 2: создать снегопад - список объектов Снежинка в отдельном списке, обработку примерно так:
 
+
 def get_flakes(count=1):
-    """ Функция создания count разнообразных снежинок. По умолчанию 1 снежинка."""
-    flakes = {}
+    """ Функция создания списка count разнообразных снежинок. По умолчанию count = 1."""
+    flakes = []
     for i in range(count):
         flake = Snowflake()
         start_point = sd.get_point(x=flake.x, y=flake.y)
-        flakes[i] = {'center': start_point,
-                     'length': flake.length,
-                     'color': flake.color,
-                     'factor_a': flake.factor_a,
-                     'factor_b': flake.factor_b,
-                     'factor_c': flake.factor_c}
+        flakes.append({'center': start_point,
+                       'length': flake.length,
+                       'color': flake.color,
+                       'factor_a': flake.factor_a,
+                       'factor_b': flake.factor_b,
+                       'factor_c': flake.factor_c})
+    return flakes
 
+
+flakes = get_flakes(5)
 
 # flakes = get_flakes(count=20)  # создать список снежинок
 # while True:
